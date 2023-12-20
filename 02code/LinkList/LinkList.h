@@ -2,7 +2,6 @@
 
 template <class ElemType>
 struct Node{
-    /* data */
     ElemType data;
     Node<ElemType> * next;
 };
@@ -15,8 +14,15 @@ private:
     //头指针
     Node<ElemType> * first;
 public:
-    LinkList(/* args */);
+    LinkList();
+    LinkList(ElemType a[], int n);
     ~LinkList();
+    int Length();
+    ElemType Get(int i);
+    int Locate();
+    void Insert(int i, ElemType x);
+    ElemType Delete(int i);
+    void PrintList();
 };
 
 
