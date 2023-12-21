@@ -19,10 +19,13 @@ public:
     ~LinkList();
     int Length();
     ElemType Get(int i);
-    int Locate();
+    int Locate(ElemType x);
     void Insert(int i, ElemType x);
     ElemType Delete(int i);
     void PrintList();
+    void Invert();
+    int Seq();
+    void Sort();
 };
 
 

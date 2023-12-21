@@ -1,9 +1,10 @@
 #include"LinkList.h"
-
+#include<iostream>
+using namespace std;
 template <class ElemType>
 LinkList<ElemType>::LinkList(){
     first = new Node<ElemType>;
-    first->next = NULL;
+    first->next = nullptr;
 }
 
 template <class ElemType>
@@ -60,22 +61,55 @@ int LinkList<ElemType>::Length(){
 
 template <class ElemType>
 ElemType LinkList<ElemType>::Get(int i){
-    
+    Node<ElemType> *p = first->next;
+    int count = 1;
+    while (count < i){
+        count++;
+        p = p->next;
+    }
+    return p->data;
+    // return *p;    
 }
 
 template <class ElemType>
-int LinkList<ElemType>::Locate(){
+int LinkList<ElemType>::Locate(ElemType x){
+    Node<ElemType> *p = first->next;
+    int count = 1;
+    while (p != nullptr){
+        if(p->data == x){
+            return count;
+        }
+        count++;
+        p = p->next;
+    }
+    return 0;
     
 }
 
 template <class ElemType>
 void LinkList<ElemType>::Insert(int i, ElemType x){
+    // 找到这个位置，然后插
+    Node<ElemType> *p = first;
+    int count = 0;
     
+    while (p != nullptr && count < i - 1){
+        p = p->next;
+        count++;
+    }
+    if(p != nullptr){
+        Node<ElemType> *s = new Node<ElemType>;
+        s->data = x;
+        s->next = p->next;
+        p->next = s;
+    }    
 }
 
 template <class ElemType>
 ElemType LinkList<ElemType>::Delete(int i){
-    
+    // 找到删，否则越界
+    if(i < 1 || i > Length()){
+        throw "error";
+    }
 }
 
 template <class ElemType>
@@ -86,5 +120,75 @@ void LinkList<ElemType>::PrintList(){
         p = p->next;
     }
     cout << endl;
+    
+}
+
+template <class ElemType>
+void LinkList<ElemType>::Invert(){
+    Node<ElemType> *p = first->next;
+    first->next = nullptr;
+    while (p != nullptr){
+        // Node<ElemType> *q = p->next;
+        // p->next = first->next;
+        // first->next = p;
+        // p = q;
+
+        // Node<ElemType> *s = p; 
+        // s->next = first->next;
+        // first->next = s;
+        // p = p->next;
+
+        // 获取当前结点的下一个结点
+        // first  --->   q
+        //        p -----^
+        // 保留下次一头插位置
+        Node<ElemType> *q = p->next;
+        // 头插
+        p->next = first->next;
+        first->next = p;
+        p = q;
+    }
+    
+}
+
+template <class ElemType>
+int LinkList<ElemType>::Seq(){
+    Node<ElemType> *p = first->next;
+    Node<ElemType> *q;
+    int flag = 1;
+    if(p != nullptr){
+        q = p->next;
+    }
+    while (p != nullptr && q != nullptr){
+        if (p->data > q->data){
+            flag = 0;
+            break;
+        }else{
+            p = p->next;
+            q = q->next;
+        }
+    }
+    return flag;
+    
+}
+
+
+template <class ElemType>
+void LinkList<ElemType>::Sort(){
+    Node<ElemType> *p = first->next;
+    Node<ElemType> *q = p->next;
+    Node<ElemType> *temp;
+    p->next = nullptr;
+    while (q != nullptr){
+        temp = q->next;
+        if(p->data < q->data){
+            // 后面插
+            q->next = p->next;
+            q->next = p;
+        }else{
+            // 前面插
+            
+        }
+    }
     
 }

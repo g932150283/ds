@@ -1,32 +1,35 @@
 #include "LinkList.h"
+#include<iostream>
+using namespace std;
+
 
 template <class ElemType>
 LinkList<ElemType>::LinkList() {
-	first = new Node<ElemType>; /*Éú³ÉÍ·½áµã*/
-	first->next = NULL; /*Í·½áµãµÄÖ¸ÕëÓòÖÃÎª¿Õ*/
+	first = new Node<ElemType>; /*ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½*/
+	first->next = nullptr; /*Í·ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½*/
 }
 
 template <class ElemType>  
 LinkList<ElemType>::LinkList(ElemType a[], int n) {
 	Node<ElemType> *r, *s;
-	first = new Node<ElemType>; /*Éú³ÉÍ·½áµã*/
-	r = first; /*Î²Ö¸Õë³õÊ¼»¯*/
+	first = new Node<ElemType>; /*ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½*/
+	r = first; /*Î²Ö¸ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½*/
 	for(int i = 0;i < n;i++) { 
-		s = new Node<ElemType>; /*ÉêÇëÐÂ½áµã*/
-		s->data = a[i]; /*¸øÐÂ½áµãµÄÊý¾ÝÓò¸³Öµ*/
-		r->next = s; /*½«ÐÂ½áµã²åÈëµ½µ¥Á´±íÄ©Î²*/
-		r = s; /*¸üÐÂÎ²Ö¸Õër*/
+		s = new Node<ElemType>; /*ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½*/
+		s->data = a[i]; /*ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ*/
+		r->next = s; /*ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä©Î²*/
+		r = s; /*ï¿½ï¿½ï¿½ï¿½Î²Ö¸ï¿½ï¿½r*/
 	}
-	r->next=NULL; /*½«ÖÕ¶Ë½áµãµÄÖ¸ÕëÓòÖÃ¿Õ*/
+	r->next=nullptr; /*ï¿½ï¿½ï¿½Õ¶Ë½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½*/
 }
 
 template <class ElemType>
 LinkList<ElemType>::~LinkList() {
 	Node<ElemType> *q;
-	while(first != NULL) { /*µ±µ¥Á´±í²»Îª¿ÕÊ±*/
-		q = first; /*ÔÝ´æ±»ÊÍ·Å½áµã*/
-		first = first->next; /*¼ÌÐø´¦ÀíÏÂÒ»¸ö½áµã*/
-		delete q; /*ÊÍ·Åq*/
+	while(first != nullptr) { /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ê±*/
+		q = first; /*ï¿½Ý´æ±»ï¿½Í·Å½ï¿½ï¿½*/
+		first = first->next; /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½*/
+		delete q; /*ï¿½Í·ï¿½q*/
 	}
 }
 
@@ -34,7 +37,7 @@ template <class ElemType>
 int LinkList<ElemType>::Length() {
 	Node<ElemType> *p = first->next;
 	int count = 0;
-	while(p != NULL) {
+	while(p != nullptr) {
 		count++;
 		p = p->next;
 	}
@@ -45,14 +48,14 @@ template <class ElemType>
 ElemType LinkList<ElemType>::Get(int i) {
 	Node<ElemType> *p = first->next;
 	int count = 1;
-	while(p != NULL && count < i) {
+	while(p != nullptr && count < i) {
 		p = p->next;
 		count++;
 	}
-	if(p!=NULL) 
+	if(p!=nullptr) 
 		return p->data;
 	else 
-		throw  "²ÎÊý·Ç·¨";
+		throw  "ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½";
 }
 
 
@@ -60,18 +63,18 @@ template <class ElemType>
 void LinkList<ElemType>::Insert(int i, ElemType x)
 {
 	Node<ElemType> *p = first,*s;
-	int j = 0; /*¹¤×÷Ö¸ÕëpÓ¦Ö¸ÏòÍ·½áµã*/
-    while(p != NULL && j < i-1) { /*²éÕÒµÚi-1¸ö½áµã*/
-		p = p->next; /*¹¤×÷Ö¸ÕëpºóÒÆ*/
-		j++; /*¼ÆÊýÆ÷¼Ó1*/
+	int j = 0; /*ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½pÓ¦Ö¸ï¿½ï¿½Í·ï¿½ï¿½ï¿½*/
+    while(p != nullptr && j < i-1) { /*ï¿½ï¿½ï¿½Òµï¿½i-1ï¿½ï¿½ï¿½ï¿½ï¿½*/
+		p = p->next; /*ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½*/
+		j++; /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1*/
     }
-    /*Ã»ÓÐÕÒµ½µÚi-1¸ö½áµã*/
-    if (p == NULL) throw "²ÎÊý²»ºÏ·¨£¬²»´æÔÚµÚi-1¸ö½áµã";
+    /*Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½i-1ï¿½ï¿½ï¿½ï¿½ï¿½*/
+    if (p == nullptr) throw "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½i-1ï¿½ï¿½ï¿½ï¿½ï¿½";
     else {
-		s = new Node<ElemType>; /*ÉêÇëÐÂ½áµã*/
-		s->data = x; /*Êý¾ÝÓò¸³Öµ*/
+		s = new Node<ElemType>; /*ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½*/
+		s->data = x; /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ*/
 		s->next = p->next;
-		p->next = s; /*½«½áµãs²åÈëµ½½áµãpÖ®ºó*/
+		p->next = s; /*ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½pÖ®ï¿½ï¿½*/
     }
 }
 
@@ -79,19 +82,19 @@ template <class ElemType>
 ElemType LinkList<ElemType>::Delete(int i) {
 	Node<ElemType> *p,*q;
 	ElemType x;
-	int j = 0; /*¼ÆÊýÆ÷³õÊ¼»¯*/
-	p = first; /*×¢Òâ¹¤×÷Ö¸ÕëpÒªÖ¸ÏòÍ·½áµã*/
-	while(p != NULL && j < i-1) { /*²éÕÒµÚi-1¸ö½áµã*/
+	int j = 0; /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½*/
+	p = first; /*×¢ï¿½â¹¤ï¿½ï¿½Ö¸ï¿½ï¿½pÒªÖ¸ï¿½ï¿½Í·ï¿½ï¿½ï¿½*/
+	while(p != nullptr && j < i-1) { /*ï¿½ï¿½ï¿½Òµï¿½i-1ï¿½ï¿½ï¿½ï¿½ï¿½*/
 		p = p->next;
 		j++;
 	}
-	if(p == NULL || p->next == NULL) /*½áµãp²»´æÔÚ»òp´æÔÚµ«pµÄºó¼Ì½áµã²»´æÔÚ*/
-		throw "²ÎÊýi²»ºÏ·¨"; 
+	if(p == nullptr || p->next == nullptr) /*ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½pï¿½ï¿½ï¿½Úµï¿½pï¿½Äºï¿½Ì½ï¿½ã²»ï¿½ï¿½ï¿½ï¿½*/
+		throw "ï¿½ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½Ï·ï¿½"; 
 	else {
 		q = p->next;
-		x = q->data; /*ÔÝ´æ±»É¾½áµãµÄÊý¾ÝÓò*/
-		p->next = q->next; /*¸ü¸Äp½áµãµÄÖ¸ÕëÓò*/
-		delete q; /*ÊÍ·Åq*/
+		x = q->data; /*ï¿½Ý´æ±»É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+		p->next = q->next; /*ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½*/
+		delete q; /*ï¿½Í·ï¿½q*/
 		return x;
 	}
 }
@@ -99,24 +102,24 @@ ElemType LinkList<ElemType>::Delete(int i) {
 template <class ElemType>  
 int LinkList<ElemType>::Locate(ElemType x) {
 	Node<ElemType> *p;
-	p = first->next; /*¹¤×÷Ö¸Õëp³õÊ¼»¯*/
-	int j = 1; /*ÀÛ¼ÓÆ÷j³õÊ¼»¯*/
-	while(p != NULL) {
+	p = first->next; /*ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½pï¿½ï¿½Ê¼ï¿½ï¿½*/
+	int j = 1; /*ï¿½Û¼ï¿½ï¿½ï¿½jï¿½ï¿½Ê¼ï¿½ï¿½*/
+	while(p != nullptr) {
 		if(p->data == x) 
-			return j; /*²éÕÒ³É¹¦£¬·µ»ØÆäÐòºÅ*/
+			return j; /*ï¿½ï¿½ï¿½Ò³É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 		p = p->next;                   
 		j++;
 	}
-	return 0; /*²éÕÒÊ§°Ü£¬·µ»Ø0*/
+	return 0; /*ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½0*/
 }
 
 template <class ElemType>
 void LinkList<ElemType>::PrintList() {
 	Node<ElemType> *p;
-	p = first->next; /*¹¤×÷Ö¸Õëp³õÊ¼»¯*/
-	while(p != NULL) {
+	p = first->next; /*ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½pï¿½ï¿½Ê¼ï¿½ï¿½*/
+	while(p != nullptr) {
 		cout<<p->data<<" ";
-		p = p->next; /*¹¤×÷Ö¸ÕëpºóÒÆ*/
+		p = p->next; /*ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½*/
 	}
 	cout<<endl;
 }
