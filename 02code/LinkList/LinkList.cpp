@@ -176,19 +176,24 @@ int LinkList<ElemType>::Seq(){
 template <class ElemType>
 void LinkList<ElemType>::Sort(){
     Node<ElemType> *p = first->next;
-    Node<ElemType> *q = p->next;
-    Node<ElemType> *temp;
-    p->next = nullptr;
-    while (q != nullptr){
-        temp = q->next;
-        if(p->data < q->data){
-            // 后面插
-            q->next = p->next;
-            q->next = p;
-        }else{
-            // 前面插
-            
+    Node<ElemType> *q, *r, *s;
+    while (p != nullptr){
+        q = p->next;
+        p->next = nullptr;
+        while (q != 0x0){
+            // 保留q下一位置
+            r = q->next;
+            s = first;
+            // 找到要插入位置
+            while ((s->next) && ((s->next->data) < (q->data))){
+                s = s->next;
+            }
+            // 插入
+            q->next = s->next;
+            s->next = q;
+            q = r;
         }
+        
     }
     
 }
