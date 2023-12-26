@@ -3,37 +3,23 @@ using namespace std;
 #include "LinkList.cpp"
 
 template <class ElemType>
-int Union(LinkList<ElemType> &L1, LinkList<ElemType> &L2){
-	Node<ElemType> *first1 = L1.GetFirst();
-	Node<ElemType> *first2 = L2.GetFirst();
-	Node<ElemType> *r = first2->next;
-	while (r != NULL){
-		// 找得到，后移
-		if(L1.Locate(r->data) > 0){
-			r = r->next;
+void Intersection(LinkList<ElemType> &L1, LinkList<ElemType> &L2){
+	Node<ElemType> *p = L1.GetFirst();
+	p = p->next;
+	while (p != NULL){
+		// 找得到，输出，并后移
+		if(L2.Locate(p->data) > 0){
+			cout << p->data << " ";
+			p = p->next;
 		}else{
-			// 1、修改L2
-			Node<ElemType> *s = r->next;
-			first2->next = s;
-			// 2、把找不到得元素插入L1
-			r->next = first1->next;
-			first1->next = r;
-			// 3、r后移
-			r = s;
+		// 找不到，只后移
+			p = p->next;
 		}
 	}
-	
+	cout << endl;
 	
 }
-void outResult(int flag) {
-	if(flag) {
-		cout<<"is equal"; 
-	}
-	else {
-		cout<<"is not equal"; 
-	}
-	cout<<endl;
-}
+
 int main() {
 	int s1[] = {1, 3, 5, 7, 9};
 	int s2[] = {1, 3, 5, 7, 9};
@@ -62,7 +48,11 @@ int main() {
     // cout<<"L2&L5 : ";
 	// outResult(SetIsEqual(L2,L5));
 	// cout << L1.Locate(1) << " " <<L1.Locate(4) << " " << L1.Locate(9) << endl;
-	Union(L2,L5);
-	L2.PrintList();
+	// Union(L2,L5);
+	// L2.PrintList();
+	cout<<"L2&L5 : ";
+	Intersection(L2,L5);
+	cout<<"L3&L4 : ";
+	Intersection(L3,L4);
 	return 0;
 }

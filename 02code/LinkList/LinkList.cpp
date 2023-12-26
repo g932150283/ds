@@ -10,35 +10,46 @@ LinkList<ElemType>::LinkList(){
 template <class ElemType>
 LinkList<ElemType>::LinkList(ElemType a[], int n){
     // 头插法 逆序
+    // first =  new Node<ElemType>;
+    // first->next = nullptr;
+    // for (int i = 0; i < n; i++){
+    //     Node<ElemType> *s = new Node<ElemType>;
+    //     s->data = a[i];
+    //     s->next = first->next;
+    //     first->next = s;
+    // }
+
+    // 尾插法 顺序
     first =  new Node<ElemType>;
-    first->next = nullptr;
+    Node<ElemType> *rear =  first;
     for (int i = 0; i < n; i++){
         Node<ElemType> *s = new Node<ElemType>;
         s->data = a[i];
-        s->next = first->next;
-        first->next = s;
+        rear->next = s;
+        rear = s;
     }
-
-    // 尾插法 顺序
-    // first =  new Node<ElemType>;
-    // rear =  first;
-    // for (int i = 0; i < n; i++){
-    //     Node s = new Node<ElemType>
-    //     s->data = a[i];
-    //     rear->next = s;
-    //     rear = s;
-    // }
-    // rear->next = nullptr;
+    rear->next = nullptr;
 }
 template <class ElemType>
 LinkList<ElemType>::~LinkList(){
     // 释放过程中，保证单链表违背处理的部分不断开
+    Node<ElemType> *p;
     while(first != nullptr){
-        Node<ElemType> *p = first;
+        p = first;
         first = first->next;
         delete p;
     }
 }
+
+// template <class ElemType>
+// LinkList<ElemType>::~LinkList() {
+// 	Node<ElemType> *q;
+// 	while(first != nullptr) { /*����������Ϊ��ʱ*/
+// 		q = first; /*�ݴ汻�ͷŽ��*/
+// 		first = first->next; /*����������һ�����*/
+// 		delete q; /*�ͷ�q*/
+// 	}
+// }
 
 template <class ElemType>
 int LinkList<ElemType>::Length(){
@@ -70,6 +81,17 @@ ElemType LinkList<ElemType>::Get(int i){
     return p->data;
     // return *p;    
 }
+
+template <class ElemType>
+Node<ElemType> * LinkList<ElemType>::GetFirst(){
+    return first;
+}
+
+// template <class ElemType>
+// Node<ElemType> *LinkList<ElemType>::GetFirst() {
+// 	return first;
+// }
+
 
 template <class ElemType>
 int LinkList<ElemType>::Locate(ElemType x){

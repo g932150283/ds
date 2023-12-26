@@ -1,14 +1,14 @@
 #include <iostream>
-#include "LinkListPoly.cpp"
+#include "LinkListPoly.h"
 using namespace std;
 
-/*ÊµÏÖÒ»Ôª¶àÏîÊ½Ïà¼Ó£¬½á¹û´æÈëLA*/ 
+/*Êµï¿½ï¿½Ò»Ôªï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½LA*/ 
 void PolyAdd(LinkListPoly &LA, LinkListPoly &LB) {
-	/*pÖ¸Ïòµ¥Á´±íLAµÄÊ×Ôª½áµã*/
-	/*qÖ¸Ïòµ¥Á´±íLBµÄÊ×Ôª½áµã*/ 
+	/*pÖ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½LAï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½*/
+	/*qÖ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½LBï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½*/ 
 	Node *p, *q;
-	/*p_preÎªpµÄÇ°Çý½áµã*/
-	/*q_preÎªqµÄÇ°Çý½áµã*/ 
+	/*p_preÎªpï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½*/
+	/*q_preÎªqï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½*/ 
 	Node *p_pre,*q_pre;
 	Node *tmp;
 	p_pre = LA.GetFirst();
@@ -16,12 +16,12 @@ void PolyAdd(LinkListPoly &LA, LinkListPoly &LB) {
 	p = p_pre->next;
 	q = q_pre->next;
 	while(p != NULL && q != NULL) {
-		/*pºóÒÆ,q²»¶¯*/ 
+		/*pï¿½ï¿½ï¿½ï¿½,qï¿½ï¿½ï¿½ï¿½*/ 
 		if(p->exp < q->exp) {
 			p_pre = p;
 			p = p->next;
 		}
-		/*p²»¶¯£¬q²åÈëµ½pÖ®Ç°£¬p_preÖ¸Ïòq£¬qÖ¸ÏòÔ­Î»ÖÃµÄÏÂÒ»¸ö½áµã*/
+		/*pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½qï¿½ï¿½ï¿½ëµ½pÖ®Ç°ï¿½ï¿½p_preÖ¸ï¿½ï¿½qï¿½ï¿½qÖ¸ï¿½ï¿½Ô­Î»ï¿½Ãµï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½*/
 		else if(p->exp > q->exp) {
 			tmp = q->next; 
 			q_pre->next = q->next;
@@ -30,25 +30,25 @@ void PolyAdd(LinkListPoly &LA, LinkListPoly &LB) {
 			p_pre = q;
 			q = tmp; 
 		}
-		/*Ö¸ÊýÏàµÈ£¬ºÏ²¢½áµãpºÍqµÄÏµÊý*/ 
+		/*Ö¸ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½qï¿½ï¿½Ïµï¿½ï¿½*/ 
 		else if(p->exp == q->exp) {
 			p->coef = p->coef + q->coef;
 			if(p->coef == 0) {
-			  /*ÏµÊýÎª0Ê±£¬É¾³ýp*/
+			  /*Ïµï¿½ï¿½Îª0Ê±ï¿½ï¿½É¾ï¿½ï¿½p*/
 			  tmp = p;
 			  p = p->next;
 			  p_pre->next = p; 	
 			  delete tmp;
 			}
-			/*É¾³ýq*/
+			/*É¾ï¿½ï¿½q*/
 			tmp = q;
 			q = q->next;
 			q_pre->next = q;
 			delete tmp;
 		}
 	}
-	/*pÒÑÎª¿Õ£¬Èç¹ûq²»Îª¿Õ£¬Ôò½«qÁ¬½Óµ½p_preµÄºóÃæ*/
-	/*´ËÊ±pÎª¿Õ£¬p_pre²»Îª¿Õ*/
+	/*pï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½qï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½qï¿½ï¿½ï¿½Óµï¿½p_preï¿½Äºï¿½ï¿½ï¿½*/
+	/*ï¿½ï¿½Ê±pÎªï¿½Õ£ï¿½p_preï¿½ï¿½Îªï¿½ï¿½*/
 	if(q != NULL) {
 		p_pre->next = q;
 	} 
@@ -58,15 +58,15 @@ int main() {
 	int c1[4] = {-3, 8, -9, 100};
 	int p1[4] = {0, 2, 4, 6};
 	LinkListPoly LA(c1, p1, 4);
-	cout<<"µÚÒ»¸ö¶àÏîÊ½Îª£º"<<endl; 
+	cout<<"ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Îªï¿½ï¿½"<<endl; 
 	LA.PrintList();
 	int c2[6]={7, 20, -8, 12, 30, 40};
 	int p2[6]={0, 1, 2, 3, 6, 10};
-	cout<<"µÚ¶þ¸ö¶àÏîÊ½Îª£º"<<endl;
+	cout<<"ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Îªï¿½ï¿½"<<endl;
 	LinkListPoly LB(c2, p2, 6);
 	LB.PrintList();
 	PolyAdd(LA, LB);
-	cout<<"Ïà¼ÓÒÔºóµÄ¶àÏîÊ½Îª£º"<<endl;
+	cout<<"ï¿½ï¿½ï¿½ï¿½Ôºï¿½Ä¶ï¿½ï¿½ï¿½Ê½Îªï¿½ï¿½"<<endl;
 	LA.PrintList();
 	return 0;	
 }

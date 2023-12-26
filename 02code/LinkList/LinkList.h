@@ -19,6 +19,8 @@ public:
     ~LinkList();
     int Length();
     ElemType Get(int i);
+    Node<ElemType> * GetFirst();
+    // Node<ElemType> *GetFirst();
     int Locate(ElemType x);
     void Insert(int i, ElemType x);
     ElemType Delete(int i);
@@ -26,6 +28,7 @@ public:
     void Invert();
     int Seq();
     void Sort();
+    
 };
 
 
